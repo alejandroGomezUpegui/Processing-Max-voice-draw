@@ -1,0 +1,50 @@
+import netP5.*;
+import oscP5.*;
+
+
+OscP5 oscar;
+
+float intensity = 0;
+
+  float x = width/2;
+  float y = height/2;
+  
+void setup() {
+ // size(1920,1080);
+ fullScreen();
+  background(0);
+  oscar = new OscP5(this, 6002);
+  oscar.plug(this, "setAmp", "/amp");
+}
+
+public void setAmp(float amp){
+ intensity =( amp * 100 );
+  println( amp * 10);
+}
+
+void draw() {
+  float a = random(1, 2);
+  float b = random(1, 2);
+  float r = random(0, 255);
+  float p = random(0, 255);
+  float s = random(0, 255);
+  float  h = random (0, 10);
+  float  l = random (0, 10);
+  float  m = random (0, 10);
+  float  o = random (0, 10);
+ noStroke();
+    ellipse(x,y,(intensity*10),(intensity*10));
+    float stepx = random(-m, o);
+    float stepy = random(-m, o);
+    x += stepx*intensity;
+    y += stepy*intensity;
+    fill(r, p, s);
+   
+    r = r + 1 ;
+    if ((x > width) || ( x < 10 )) {
+      x= width /2;
+    }
+    if ((y > height) || ( y < 10)){
+      y = height /2;}
+     
+}
